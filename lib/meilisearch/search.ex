@@ -52,10 +52,10 @@ defmodule Meilisearch.Search do
   def search(uid, search_query, opts \\ []) do
     params =
       case search_query do
-        nil -> opts
-        q -> [{:q, q} | opts]
+        nil -> Enum.into(opts, %{})
+        q -> Enum.into(opts, %{}) |> Map.put(:q, q)
       end
 
-    HTTP.get_request("indexes/#{uid}/search", [], params: params)
+    HTTP.post_request("indexes/#{uid}/search", params, [{"Content-Type", "application/json"}])
   end
 end
