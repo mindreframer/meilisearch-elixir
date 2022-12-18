@@ -52,12 +52,13 @@ Meilisearch.Search.search("water")
 
 ### Async Tasks
 
-Meilisearch enqueues most of the commands you execute. 
+Meilisearch enqueues most of the commands you execute.
 
-Because of this, it might at times be necessary to "wait" until Meilisearch 
+Because of this, it might at times be necessary to "wait" until Meilisearch
 has finished processing the given task before you can perform further operations.
 
 For example, when adding `Documents`, the return object is:
+
 ```elixir
 {:ok, %{
     "taskUid" => 1,
@@ -70,7 +71,7 @@ For example, when adding `Documents`, the return object is:
 
 In order to block your program while you wait for the resolution of this enqueued
 task, you can use the `Tasks.await_result/2` method, which will continue to execute
-`get` requests to the `Tasks` endpoint until the `status` of the response is 
+`get` requests to the `Tasks` endpoint until the `status` of the response is
 either `succeeded` or `failed`.
 
 ### Migrating from 0.20.0
@@ -82,7 +83,7 @@ created index, now it is necessary to wait for the task to be resolved before ac
 or further modifying a given entity - for this, use the `Tasks.await_result/2` function.
 
 Because of this, some functions do not return errors as expected - notably, `Indexes.create` when
-creating indexes with duplicate uid's, as well as `Indexes.delete` and `Indexes.update` in some cases. 
+creating indexes with duplicate uid's, as well as `Indexes.delete` and `Indexes.update` in some cases.
 
 Make sure to check the finalized task for errors that might have been caused by these
 methods (using `Task.await_result/2`).
@@ -93,22 +94,21 @@ endpoint simply refers to the `maxValuesPerFacet` setting.
 
 ### Available Modules
 
-- [X] Index
-- [X] Health
-- [X] Stats
-- [X] Version
-- [X] Documents
-- [X] Search
-- [X] Updates
-- [X] Keys
-- [X] Settings
-- [X] System Information
+- [x] Index
+- [x] Health
+- [x] Stats
+- [x] Version
+- [x] Documents
+- [x] Search
+- [x] Tasks
+- [x] Keys
+- [x] Settings
 
 ## Config
 
 Client settings can be configured in your application config or with environment variables.
 
-*Note: environment variables will override values in the application config.*
+_Note: environment variables will override values in the application config._
 
 ### Application Config
 
@@ -128,17 +128,19 @@ MEILISEARCH_API_KEY=test_api_key mix test
 ## Compatibility
 
 The 0.30.X versions of this client have been teseted against the following versions of Meilisearch:
-  - v0.28.0
+
+- v0.28.0
 
 The 0.20.X versions of this client have been tested against the following versions of Meilisearch:
-  - v0.20.0
-  - v0.19.0
-  - v0.18.1
-  - v0.17.0
+
+- v0.20.0
+- v0.19.0
+- v0.18.1
+- v0.17.0
 
 ## Development
 
-You will need  Meilisearch running locally for development and testing.  You can do this via Docker:
+You will need Meilisearch running locally for development and testing. You can do this via Docker:
 
 ```
 $ docker run -it --rm -p 7700:7700 getmeili/meilisearch:latest ./meilisearch --master-key=test_api_key
