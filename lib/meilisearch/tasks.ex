@@ -38,7 +38,7 @@ defmodule Meilisearch.Tasks do
   Get the status of all tasks.
 
   ## Example
-      iex> Meilisearch.Updates.list()
+      iex> Meilisearch.Tasks.list()
       {:ok,
         [
           %{
