@@ -74,7 +74,7 @@ defmodule Meilisearch.Tasks do
   @spec list() :: HTTP.response()
   def list() do
     case HTTP.get_request("tasks") do
-      {:ok, %{ "results" => tasks }} -> {:ok, tasks}
+      {:ok, %{"results" => tasks}} -> {:ok, tasks}
       error -> error
     end
   end
@@ -116,7 +116,7 @@ defmodule Meilisearch.Tasks do
           },
       ]}
   """
-  @spec list(String.t) :: HTTP.response()
+  @spec list(String.t()) :: HTTP.response()
   def list(index_uid) do
     case HTTP.get_request("tasks?indexUids=#{index_uid}") do
       {:ok, %{"results" => tasks}} -> {:ok, tasks}
@@ -131,7 +131,7 @@ defmodule Meilisearch.Tasks do
 
     iex> Meilisearch.Tasks.await_result(1)
     {:ok,
-      %{ 
+      %{
         "uid" => 4,
         "indexUid"  =>"movie",
         "status" => "failed",
@@ -152,10 +152,10 @@ defmodule Meilisearch.Tasks do
       }
     }
   """
-  @spec await_result(String.t) :: HTTP.response()
+  @spec await_result(String.t()) :: HTTP.response()
   def await_result(task_uid, for_milli \\ 250) do
     case get(task_uid) do
-      {:ok, %{"status" => status}} when status in ["enqueued", "processing"] -> 
+      {:ok, %{"status" => status}} when status in ["enqueued", "processing"] ->
         :timer.sleep(for_milli)
         await_result(task_uid, for_milli)
 
@@ -163,5 +163,4 @@ defmodule Meilisearch.Tasks do
         message
     end
   end
-
 end

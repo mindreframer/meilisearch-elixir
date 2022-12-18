@@ -9,7 +9,7 @@ defmodule Meilisearch.SettingsTest do
   @stop_words ["the", "of", "to"]
   @ranking_rules ["typo", "words", "proximity", "attribute"]
   @filterable_attributes ["title"]
-  @faceting %{ maxValuesPerFacet: 4 }
+  @faceting %{maxValuesPerFacet: 4}
   @distinct_attribute "id"
   @searchable_attributes ["title"]
   @displayed_attributes ["title"]
@@ -120,7 +120,7 @@ defmodule Meilisearch.SettingsTest do
   end
 
   test "Settings.get_faceting" do
-    assert {:ok, %{ "maxValuesPerFacet" => _ }} = Settings.get_faceting(@test_index)
+    assert {:ok, %{"maxValuesPerFacet" => _}} = Settings.get_faceting(@test_index)
   end
 
   test "Settings.update_faceting" do

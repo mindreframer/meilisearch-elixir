@@ -55,7 +55,7 @@ defmodule Meilisearch.TasksTest do
 
   test "Tasks.await_result waits for a finalized task" do
     {:ok, %{"taskUid" => task_id}} = Documents.add_or_replace(@test_index, [@test_document])
-    assert {:ok, %{ "status" => "enqueued" }} = Tasks.get(task_id)
-    assert {:ok, %{ "status" => "succeeded" }} = Tasks.await_result(task_id)
+    assert {:ok, %{"status" => "enqueued"}} = Tasks.get(task_id)
+    assert {:ok, %{"status" => "succeeded"}} = Tasks.await_result(task_id)
   end
 end

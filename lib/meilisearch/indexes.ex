@@ -26,7 +26,7 @@ defmodule Meilisearch.Indexes do
   @spec list :: HTTP.response()
   def list do
     case HTTP.get_request("indexes") do
-      {:ok, %{ "results" => indexes }} -> {:ok, indexes}
+      {:ok, %{"results" => indexes}} -> {:ok, indexes}
       error -> error
     end
   end

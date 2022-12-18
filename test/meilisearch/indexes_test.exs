@@ -6,7 +6,7 @@ defmodule Meilisearch.IndexTest do
   @test_index Meilisearch.Config.get(:test_index)
 
   setup do
-    {:ok, %{ "taskUid" => task_id }} = Indexes.delete(@test_index)
+    {:ok, %{"taskUid" => task_id}} = Indexes.delete(@test_index)
     wait_for_update(task_id)
 
     :ok
@@ -21,7 +21,9 @@ defmodule Meilisearch.IndexTest do
       create_index(@test_index)
 
       assert {:ok, [index]} = Indexes.list()
-      assert %{"createdAt" => _, "updatedAt" => _, "uid" => @test_index, "primaryKey" => nil} = index
+
+      assert %{"createdAt" => _, "updatedAt" => _, "uid" => @test_index, "primaryKey" => nil} =
+               index
     end
   end
 
@@ -40,8 +42,8 @@ defmodule Meilisearch.IndexTest do
 
   describe "Indexes.create" do
     test "creates a new index" do
-      assert {:ok, %{ "taskUid" => update_id }} = Indexes.create(@test_index)
-    
+      assert {:ok, %{"taskUid" => update_id}} = Indexes.create(@test_index)
+
       wait_for_update(update_id)
 
       assert {:ok, index} = Indexes.get(@test_index)
@@ -51,14 +53,15 @@ defmodule Meilisearch.IndexTest do
     test "returns an error when given duplicate index uid" do
       create_index(@test_index)
 
-      {:ok, %{ "taskUid" => update_id }} = Indexes.create(@test_index)
+      {:ok, %{"taskUid" => update_id}} = Indexes.create(@test_index)
 
-      assert {:ok, %{ "error" => %{ "code" => "index_already_exists" }}} = wait_for_update(update_id)
+      assert {:ok, %{"error" => %{"code" => "index_already_exists"}}} = wait_for_update(update_id)
     end
 
     test "create new index with primary key if given" do
-      assert {:ok, %{ "taskUid" => update_id }} = Indexes.create(@test_index, primary_key: "test_key")
-    
+      assert {:ok, %{"taskUid" => update_id}} =
+               Indexes.create(@test_index, primary_key: "test_key")
+
       wait_for_update(update_id)
 
       assert {:ok, index} = Indexes.get(@test_index)
@@ -70,7 +73,9 @@ defmodule Meilisearch.IndexTest do
     test "Tasks primary key" do
       create_index(@test_index)
 
-      {:ok, %{ "taskUid" => update_id }} = Indexes.update(@test_index, primary_key: "new_primary_key")
+      {:ok, %{"taskUid" => update_id}} =
+        Indexes.update(@test_index, primary_key: "new_primary_key")
+
       wait_for_update(update_id)
 
       assert {:ok, %{"primaryKey" => "new_primary_key"}} = Indexes.get(@test_index)
@@ -82,15 +87,20 @@ defmodule Meilisearch.IndexTest do
       assert {:error, "primary_key is required"} = Indexes.update(@test_index)
     end
 
-    @tag :skip # No error results if no documents exist in index
+    # No error results if no documents exist in index
+    @tag :skip
     test "results in an error if primary key is already set" do
       create_index(@test_index)
 
-      {:ok, %{ "taskUid" => update_id }} = Indexes.update(@test_index, primary_key: "new_primary_key")
+      {:ok, %{"taskUid" => update_id}} =
+        Indexes.update(@test_index, primary_key: "new_primary_key")
+
       wait_for_update(update_id)
 
-      {:ok, %{ "taskUid" => update_id }} = Indexes.update(@test_index, primary_key: "another_primary_key")
-      assert {:ok, %{ "status" => "failed" }} = wait_for_update(update_id)
+      {:ok, %{"taskUid" => update_id}} =
+        Indexes.update(@test_index, primary_key: "another_primary_key")
+
+      assert {:ok, %{"status" => "failed"}} = wait_for_update(update_id)
     end
   end
 
@@ -98,16 +108,20 @@ defmodule Meilisearch.IndexTest do
     test "deletes index and returns details" do
       create_index(@test_index)
 
-      assert {:ok, %{ "taskUid" => update_id, "status" => "enqueued", "type" => "indexDeletion" }} = Indexes.delete(@test_index)
+      assert {:ok, %{"taskUid" => update_id, "status" => "enqueued", "type" => "indexDeletion"}} =
+               Indexes.delete(@test_index)
+
       wait_for_update(update_id)
       assert {:ok, false} = Indexes.exists?(@test_index)
     end
 
     test "results in an error if index does not exist" do
-      assert {:ok, %{ "status" => "enqueued", "taskUid" => update_id }} = Indexes.delete(@test_index)
+      assert {:ok, %{"status" => "enqueued", "taskUid" => update_id}} =
+               Indexes.delete(@test_index)
+
       wait_for_update(update_id)
 
-      assert {:ok, %{ "error" => %{ "code" => "index_not_found" }}} = Tasks.get(update_id)
+      assert {:ok, %{"error" => %{"code" => "index_not_found"}}} = Tasks.get(update_id)
     end
   end
 

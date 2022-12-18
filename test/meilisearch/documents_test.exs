@@ -55,7 +55,7 @@ defmodule Meilisearch.DocumentsTest do
     end
 
     test "Documents.list" do
-      {:ok, %{ "results" => [document | _] }} = Documents.list(@test_index)
+      {:ok, %{"results" => [document | _]}} = Documents.list(@test_index)
 
       assert Map.get(document, "id") == 1
       assert Map.get(document, "title") == "Alien"
