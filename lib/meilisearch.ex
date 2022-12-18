@@ -11,7 +11,8 @@ defmodule Meilisearch do
   * `Meilisearch.Keys`: [Keys API](https://docs.meilisearch.com/references/keys.html)
   * `Meilisearch.Stats`: [Stats API](https://docs.meilisearch.com/references/stats.html)
   * `Meilisearch.Health`: [Health API](https://docs.meilisearch.com/references/health.html)
+  * `Meilisearch.Settings`: [Settings API](https://docs.meilisearch.com/reference/api/settings.html)
   * `Meilisearch.Version`: [Version API](https://docs.meilisearch.com/references/version.html)
-  * `Meilisearch.System`: [System Information API](https://docs.meilisearch.com/references/sys-info.html)
+
   """
 end
