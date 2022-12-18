@@ -45,7 +45,7 @@ jobs:
       #   run: mix credo
 
       - name: Meilisearch Docker setup
-        run: docker run -d -p 7700:7700 getmeili/meilisearch:v${{ matrix.meilisearch }} meilisearch --master-key=test_api_key --no-analytics=true
+        run: docker run -d -p 7700:7700 getmeili/meilisearch:v${{ matrix.meilisearch }} meilisearch --master-key=test_api_key --no-analytics
 
       - name: Run Tests
         run: mix test
