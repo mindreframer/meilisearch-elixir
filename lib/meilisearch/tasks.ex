@@ -118,8 +118,8 @@ defmodule Meilisearch.Tasks do
   """
   @spec list(String.t) :: HTTP.response()
   def list(index_uid) do
-    case HTTP.get_request("tasks?indexUid=#{index_uid}") do
-      {:ok, %{ "results" => tasks }} -> {:ok, tasks}
+    case HTTP.get_request("tasks?indexUids=#{index_uid}") do
+      {:ok, %{"results" => tasks}} -> {:ok, tasks}
       error -> error
     end
   end
