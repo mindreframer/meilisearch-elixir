@@ -121,29 +121,21 @@ config :meilisearch,
 ### Environment Variables
 
 ```shell
-MEILISEARCH_ENDPOINT=http://localhost:7700 mix test
-MEILISEARCH_API_KEY=test_api_key mix test
+$ MEILISEARCH_ENDPOINT=http://localhost:7700 MEILISEARCH_API_KEY=test_api_key mix test
 ```
 
 ## Compatibility
 
 The 0.30.X versions of this client have been teseted against the following versions of Meilisearch:
 
-- v0.28.0
-
-The 0.20.X versions of this client have been tested against the following versions of Meilisearch:
-
-- v0.20.0
-- v0.19.0
-- v0.18.1
-- v0.17.0
+- v0.30.0
 
 ## Development
 
 You will need Meilisearch running locally for development and testing. You can do this via Docker:
 
-```
-$ docker run -it --rm -p 7700:7700 getmeili/meilisearch:latest ./meilisearch --master-key=test_api_key
+```bash
+$ docker run -it -rm -p 7700:7700 getmeili/meilisearch:v0.30.0 meilisearch --master-key=test_api_key --no-analytics
 ```
 
 ## License

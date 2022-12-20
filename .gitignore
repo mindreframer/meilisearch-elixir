@@ -13,3 +13,4 @@ priv/plts/*
 !priv/plts/.gitkeep
 .vscode
 TODO.md
+dumps/
