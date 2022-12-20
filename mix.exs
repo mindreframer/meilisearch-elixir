@@ -36,11 +36,7 @@ defmodule Meilisearch.MixProject do
     [
       {:httpoison, "~> 1.8"},
       {:jason, "~> 1.2"},
-      {:credo, "~> 1.5", only: [:dev, :test], runtime: false},
-      {:dialyxir, "~> 1.1", only: [:dev], runtime: false},
-      {:excoveralls, "~> 0.14.0", only: [:test]},
-      {:ex_doc, "~> 0.25", only: [:dev], runtime: false},
-      {:mix_test_watch, "~> 1.1", only: :dev, runtime: false}
+      {:ex_doc, "~> 0.25", only: [:dev], runtime: false}
     ]
   end
 
